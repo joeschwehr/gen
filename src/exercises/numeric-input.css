@@ -20,3 +20,8 @@
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.c-numeric-input--valid {
+    border: 2px solid green;
+    background-color: #ccffcc;
+}
