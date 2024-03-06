@@ -14,10 +14,13 @@ for this project we are using: node v18.17.0 (npm v9.6.7) along with below depen
 * [@web/test-runner](https://modern-web.dev/docs/test-runner/overview/)
 
 # Getting Started
+```
+npm run start
+```
 You can then view the app in your browser at
 [http://localhost:4001](http://localhost:4001).
 
-Additionally, you can start api-service by run:
+Additionally, you can start api-service by running:
 
 ```
 npm run start:api
@@ -27,7 +30,7 @@ You can then view the API in your browser at
 [http://localhost:4002](http://localhost:4002). Available API endpoints:
 
  * [product](http://localhost:4002/products)
- * [cart](http://localhost:4002/products)
+ * [cart](http://localhost:4002/cart)
 
 To set up unit test, file must be named with `.test.js` and can be run by below command:
 
