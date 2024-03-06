@@ -13,7 +13,7 @@ for this project we are using: node v18.17.0 (npm v9.6.7) along with below depen
 * [@open-wc/testing](https://open-wc.org/docs/testing/helpers/)
 * [@web/test-runner](https://modern-web.dev/docs/test-runner/overview/)
 
-# Getting Start
+# Getting Started
 You can then view the app in your browser at
 [http://localhost:4001](http://localhost:4001).
 
