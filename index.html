@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" href="/src/components/tab/tab.css" />
+    <link rel="stylesheet" href="/src/exercises/numeric-input.css" />
 </head>
+
 <body>
-<div id="root">
-    <div class="c-tab" data-default-tab="0">
-        <div class="c-tab--btns">
-            <button data-for-tab="0">Numeric Input</button>
-            <button data-for-tab="1">Relative Dates</button>
-            <button data-for-tab="2">Shopping Cart</button>
-        </div>
-        <div class="c-tab--content">
-            <div data-tab="0">
-                <h1>Numeric Input Component</h1>
-                <label>Enter Number: </label>
-                <input class="c-numeric-input" type="text"/>
+    <div id="root">
+        <div class="c-tab" data-default-tab="0">
+
+            <div class="c-tab--btns">
+                <button data-for-tab="0">Numeric Input</button>
+                <button data-for-tab="1">Relative Dates</button>
+                <button data-for-tab="2">Shopping Cart</button>
             </div>
-            <div data-tab="1">
-                <h1>Relative Date</h1>
-                <label>Input Date:</label>
-                <input type="date" id="relative-date-input" /> <br/>
-                <label>Output:</label>
-                <span id="relative-date-msg"></span> <br/>
-                <button id="relative-date-btn">Get Relative Date</button>
-            </div>
-            <div data-tab="2">
-                <h1>Shopping Cart</h1>
-                <table id="shopping-cart-tbl" border="1" cellpadding="16px">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Item</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+
+            <div class="c-tab--content">
+                <div data-tab="0">
+                    <h1>Numeric Input Component</h1>
+                    <label>Enter Number: </label>
+                    <input class="c-numeric-input" type="text" />
+                </div>
+
+                <div data-tab="1">
+                    <h1>Relative Date</h1>
+                    <label>Input Date:</label>
+                    <input type="date" id="relative-date-input" /> <br />
+                    <label>Output:</label>
+                    <span id="relative-date-msg"></span> <br />
+                    <button id="relative-date-btn">Get Relative Date</button>
+                </div>
+
+                <div data-tab="2">
+                    <h1>Shopping Cart</h1>
+                    <table id="shopping-cart-tbl" border="1" cellpadding="16px">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Item</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script type="module" src="src/app.js" defer></script>
+    <script type="module" src="src/app.js" defer></script>
 </body>
+
 </html>
