@@ -1,3 +1,6 @@
+// ATTN: you can enter multiple negative signs to test the error class
+// you can also enter negative sign at the end of the number to test the error class
+
 /*
 * Numeric Input Component
 *   HTML (initial state): <input type="text" class="c-numeric-input" />
@@ -9,12 +12,12 @@
 *   ✅ if user enters leading zero, or .  when user moves focus away from the input, it should
 *     change to correct format:
 *       .1 ==> 0.1 and 01 => 1
-*   - if user enter valid value and move focus away from the input HTML should change to this:
+*   ✅ if user enter valid value and move focus away from the input HTML should change to this:
 *       <input type="text" class="c-numeric-input c-numeric-input--valid" />
-*   - if user focus on the input or user clear value from the input,
+*   ✅  if user focus on the input or user clear value from the input,
 *     HTML should return to initial stage
 *
-* Lastly, please add some css for c-numeric-input--error and c-numeric-input--valid to show
+* ✅ Lastly, please add some css for c-numeric-input--error and c-numeric-input--valid to show
 * red or green border to the input
 * */
 
@@ -33,27 +36,23 @@ const NumericInput = {
   },
 
   onFocus: (e) => {
+    //   - if user focus on the input... HTML should return to initial stage
+    removeErrorMessage(e);
+    e.target.classList.remove('c-numeric-input--valid');
 
   },
 
   onBlur: (e) => {
-    let value = e.srcElement.value;
-    // *     change to correct format:
-    // *     01 => 1
-    if (value.startsWith('0') && value.length > 1 && value[1] !== '.') {
-      e.srcElement.value = value.slice(1);
+    if (e.target.value !== '') {
+      fixFormatting(e);
+      validate(e, true);
     }
-
-    // *     change to correct format:
-    // *       .1 ==> 0.1
-    if (value.startsWith('.'))
-      e.srcElement.value = '0' + value;
   }
 };
 
 document.addEventListener('DOMContentLoaded', NumericInput.init);
 
-const validate = (e) => {
+const validate = (e, isBlur = false) => {
   const numericRegex = /^-?\d*\.?\d+$/ // - digit, ., digit
   const incompleteNumericRegex = /^-?\d*\.?$/ // - digit, .
 
@@ -62,6 +61,12 @@ const validate = (e) => {
     e.target.value === '-' ||
     incompleteNumericRegex.test(e.target.value)) {
     removeErrorMessage(e);
+
+    if (isBlur) {
+      e.target.classList.remove('c-numeric-input--valid');
+      // add valid class
+      e.target.classList.add('c-numeric-input--valid');
+    }
   } else if (!numericRegex.test(e.target.value)) {
     addErrorMessage(e);
   } else {
@@ -80,11 +85,10 @@ const sanitize = (e) => {
   }
 
   // no dot then hypen
-  // COMMENTED THIS TO TEST FOR ERRORS (".-"" will cause error)
-  // if (e.target.value[0] === '.') {
-  //   if (e.target.value[1] === '-')
-  //     e.target.value = e.target.value.slice(0, 1);
-  // }
+  if (e.target.value[0] === '.') {
+    if (e.target.value[1] === '-')
+      e.target.value = e.target.value.slice(0, 1);
+  }
 
   // only one decimal point
   if (e.target.value.includes('.')) {
@@ -93,12 +97,13 @@ const sanitize = (e) => {
     }
   }
 
+  // COMMENTED TO ALLOW MULTIPLE NEGATIVE SIGNS FOR TESTING
   // only one negative sign
-  if (e.target.value.includes('-')) {
-    if (e.target.value.match(/-/g).length > 1) {
-      e.target.value = e.target.value.slice(0, -1);
-    }
-  }
+  // if (e.target.value.includes('-')) {
+  //   if (e.target.value.match(/-/g).length > 1) {
+  //     e.target.value = e.target.value.slice(0, -1);
+  //   }
+  // }
 
   // only one leading zero
   if (e.target.value.startsWith('0')) {
@@ -131,12 +136,24 @@ const removeErrorMessage = (e) => {
   // remove error class
   e.target.classList.remove('c-numeric-input--error');
 
-  // add valid class
-  e.target.classList.add('c-numeric-input--valid');
-
   // remove error message if it exists
   const el = document.querySelector('.c-numeric-input__error-msg');
   if (el) {
     el.remove();
   }
+}
+
+const fixFormatting = (e) => {
+  let value = e.srcElement.value;
+
+  // *     change to correct format:
+  // *     01 => 1
+  if (value.startsWith('0') && value.length > 1 && value[1] !== '.') {
+    e.srcElement.value = value.slice(1);
+  }
+
+  // *     change to correct format:
+  // *       .1 ==> 0.1
+  if (value.startsWith('.'))
+    e.srcElement.value = '0' + value;
 }
