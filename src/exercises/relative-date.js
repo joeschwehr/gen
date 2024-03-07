@@ -149,7 +149,7 @@ const View = {
     <div>
     <p data-testid='this-month-1'>This month: ${year}, ${month}, ${date} <= ${lastWeek.toDateString()}
       <span class="note text-sm">
-        requirements: "date <= today - 14" seem odd
+        requirements: "date <= today - 14" seems odd
       </span>
     </p>
     <p data-testid='this-month-2'>This month: ${month} ${1}, ${year} TO ${month} ${lastDayOfMonth}, ${year}
