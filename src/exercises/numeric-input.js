@@ -76,12 +76,6 @@ const sanitize = (e) => {
   // remove invalid characters
   e.target.value = e.target.value.replace(/[^0-9.-]/g, '');
 
-  // no hypen then dot
-  if (e.target.value[0] === '-') {
-    if (e.target.value[1] === '.')
-      e.target.value = e.target.value.slice(0, 1); // first character only
-  }
-
   // no dot then hypen
   if (e.target.value[0] === '.') {
     if (e.target.value[1] === '-')
@@ -157,14 +151,19 @@ const fixFormatting = (e) => {
     // -01 => -1
     e.srcElement.value = '-' + value.slice(2);
 
-  } else if (value === '-0') {
+  } else if (value === '-0' || value === '-.0') {
     // -0 => 0
     e.srcElement.value = '0';
 
-  } else if (value.endsWith('.') && value.length > 1) {
+  }
+
+  if (value.endsWith('.') && value.length > 1) {
     // 0. => 0
     e.srcElement.value = value.slice(0, -1);
   }
+
+  if (Number(e.srcElement.value).toString())
+    e.srcElement.value = Number(e.srcElement.value).toString();
 }
 
 const showGreenStyle = (e) => {
