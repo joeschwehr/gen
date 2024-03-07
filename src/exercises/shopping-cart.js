@@ -14,11 +14,46 @@
 * 1002   iPad
 *
 * */
-const View = {
-  init: () => {
-    const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
 
-    console.log('TODO: Please see the above requirement');
+const View = {
+  init: async () => {
+    const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
+    tbodyElem.innerHTML = ''; // Clear existing content
+
+    // fetch cart data
+    const cartRes = await fetch('http://localhost:4002/cart');
+    const cartData = await cartRes.json();
+
+    // fetch product data
+    const productRes = await fetch('http://localhost:4002/products');
+    const productData = await productRes.json();
+
+    try {
+      const cartItems = cartData.map(cartItem => {
+        const product = productData.find(product => product.id === cartItem.id);
+        return {
+          id: cartItem.id,
+          name: product.name
+        };
+      });
+
+      // add cart items to table
+      cartItems.forEach(cartItem => {
+        const newRow = document.createElement('tr');
+        const idTdElem = document.createElement('td');
+        const nameTdElem = document.createElement('td');
+
+        idTdElem.textContent = cartItem.id;
+        nameTdElem.textContent = cartItem.name;
+
+        newRow.appendChild(idTdElem);
+        newRow.appendChild(nameTdElem);
+        tbodyElem.appendChild(newRow);
+      });
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   }
 };
+
 document.addEventListener('DOMContentLoaded', View.init);
