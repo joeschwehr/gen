@@ -18,11 +18,13 @@ const calculateRelativeDate = (inputDate) => {
 
   const today = new Date(inputDate);
 
+  if (today.toString() === 'Invalid Date') return;
+
   const year = today.getFullYear();
   const month = months[today.getMonth()];
   const lastMonth = today.getMonth() - 1 < 0 ? 'Dec' : months[today.getMonth() - 1];
   const date = today.getDate();
-  const dayOfWeek = today.getDay();
+  const dayOfWeek = today.getDay(); // 0 - 6
 
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
