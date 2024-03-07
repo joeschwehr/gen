@@ -2,8 +2,10 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="/src/globals.css" />
     <link rel="stylesheet" href="/src/components/tab/tab.css" />
     <link rel="stylesheet" href="/src/exercises/numeric-input.css" />
+    <link rel="stylesheet" href="/src/exercises/relative-date.css" />
 </head>
 
 <body>
@@ -19,21 +21,35 @@
             <div class="c-tab--content">
                 <div data-tab="0">
                     <h1>Numeric Input Component</h1>
+                    <div class="note">
+                        I'm sanitizing the input, but you can enter multiple negative signs, and negative signs at the
+                        end of the string to test the error class.
+                    </div>
+                    <br />
                     <label>Enter Number: </label>
                     <input class="c-numeric-input" type="text" />
                 </div>
 
                 <div data-tab="1">
                     <h1>Relative Date</h1>
-                    <label>Input Date:</label>
-                    <input type="date" id="relative-date-input" /> <br />
-                    <label>Output:</label>
-                    <span id="relative-date-msg"></span> <br />
-                    <button id="relative-date-btn">Get Relative Date</button>
+                    <div class="note">
+                        I'm not sure I'm understanding all the requirements for this page, so I've
+                        added notes and additional output.
+                    </div>
+                    <br />
+
+                    <div class="flex">
+                        <input type="date" id="relative-date-input" />
+                        <button id="relative-date-btn" disabled>Get Relative Date</button>
+                    </div>
+
+                    <div id="relative-date-msg"></div>
                 </div>
 
                 <div data-tab="2">
                     <h1>Shopping Cart</h1>
+                    <br />
+
                     <table id="shopping-cart-tbl" border="1" cellpadding="16px">
                         <thead>
                             <tr>
