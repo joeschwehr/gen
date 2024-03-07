@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    background-color: #aeaeae;
+    padding: 1rem;
+    border-bottom: 0.5px solid black;
 }
 
 .c-tab--content {
