@@ -62,7 +62,57 @@ const calculateRelativeDate = (inputDate) => {
   const twoThousandYearsAgo = new Date(today);
   twoThousandYearsAgo.setFullYear(today.getFullYear() - 2000);
 
-  return `
+  return {
+    today,
+    year,
+    month,
+    date,
+    yesterday,
+    thisWeek,
+    startOfThisWeek,
+    endOfThisWeek,
+    lastWeek,
+    startOfLastWeek,
+    endOfLastWeek,
+    lastMonth,
+    lastDayOfMonth,
+    tenYearsago,
+    fiftyYearsAgo,
+    hundredYearsAgo,
+    thousandYearsAgo,
+    twoThousandYearsAgo
+  };
+};
+
+const View = {
+  init: () => {
+    const inputDateElem = document.getElementById('relative-date-input');
+    const btn = document.getElementById('relative-date-btn');
+
+    // enable button if input is valid
+    inputDateElem.addEventListener('input', e => {
+      if (new Date(e.target.value) !== 'Invalid Date') {
+        btn.removeAttribute('disabled');
+      } else {
+        btn.setAttribute('disabled', true);
+      }
+    })
+
+    // add text on click
+    btn.addEventListener('click', () => {
+      const msgElement = document.getElementById('relative-date-msg');
+      const inputDateElem = document.getElementById('relative-date-input');
+      msgElement.innerHTML = View.appendText(calculateRelativeDate(inputDateElem.value));
+      View.fadeIn();
+    });
+  },
+
+  appendText: (text) => {
+    const { today, year, month, date, yesterday, thisWeek, startOfThisWeek, endOfThisWeek,
+      lastWeek, startOfLastWeek, endOfLastWeek, lastMonth, lastDayOfMonth, tenYearsago,
+      fiftyYearsAgo, hundredYearsAgo, thousandYearsAgo, twoThousandYearsAgo } = text;
+
+    return `
     <p data-testid='Today'>Today: ${year}, ${month}, ${date}</p>
     <p data-testid='Yesterday'>Yesterday: ${yesterday.toDateString()}</p>
 
@@ -109,7 +159,6 @@ const calculateRelativeDate = (inputDate) => {
     </p>
     </div>
 
-
     <p data-testid='last-month'>Last month: ${lastMonth}</p>
     <p data-testid='this-year'>This year: ${year}</p>
     <p data-testid='last-year'>last year: ${year - 1}</p>
@@ -130,29 +179,6 @@ const calculateRelativeDate = (inputDate) => {
       <p data-testid='twothousand-years-ago'>2000 years ago: ${twoThousandYearsAgo.getFullYear()}</p>
     </div>
     `;
-};
-
-const View = {
-  init: () => {
-    const inputDateElem = document.getElementById('relative-date-input');
-    const btn = document.getElementById('relative-date-btn');
-
-    // enable button if input is valid
-    inputDateElem.addEventListener('input', e => {
-      if (new Date(e.target.value) !== 'Invalid Date') {
-        btn.removeAttribute('disabled');
-      } else {
-        btn.setAttribute('disabled', true);
-      }
-    })
-
-    // add text on click
-    btn.addEventListener('click', () => {
-      const msgElement = document.getElementById('relative-date-msg');
-      const inputDateElem = document.getElementById('relative-date-input');
-      msgElement.innerHTML = calculateRelativeDate(inputDateElem.value);
-      View.fadeIn();
-    });
   },
 
   // animate text
