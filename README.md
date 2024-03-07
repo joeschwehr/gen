@@ -1,4 +1,4 @@
-# JOES NOTES
+# JOE'S NOTES
 
 I believe I've completed all the requirements for this project.  
 
@@ -12,7 +12,7 @@ NUMERIC INPUT
 
 RELATIVE DATE
 * I am assuming the day of the week starts on Sunday
-* The requirements for "this week", "last week", and "this month" don't really make sense to me. I've believe I've completed these requirements successfully, but I've also added notes to the page and additional output.
+* The requirements for "this week", "last week", and "this month" don't really make sense to me. I've believe I've completed these requirements successfully, but I've also added notes to the page along with additional output.
 * "Long time ago: everything else" makes no sense to me. I've added additional output here in an effort to statisfy requirements for "Long time ago".
 * Units tests have been added for multiple years, leap years, and when tests span two years
 * All tests are passing
