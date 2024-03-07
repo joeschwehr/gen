@@ -37,23 +37,23 @@ const View = {
         };
       });
 
-      // add cart items to table
-      cartItems.forEach(cartItem => {
-        const newRow = document.createElement('tr');
-        const idTdElem = document.createElement('td');
-        const nameTdElem = document.createElement('td');
+      // append to table
+      const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
+      tbodyElem.innerHTML = buildTableHTML(cartItems);
 
-        idTdElem.textContent = cartItem.id;
-        nameTdElem.textContent = cartItem.name;
-
-        newRow.appendChild(idTdElem);
-        newRow.appendChild(nameTdElem);
-        tbodyElem.appendChild(newRow);
-      });
     } catch (error) {
       console.error('An error occurred:', error);
     }
   }
 };
+
+function buildTableHTML(cartItems) {
+  return cartItems.map(cartItem => `
+    <tr>
+      <td>${cartItem.id}</td>
+      <td>${cartItem.name}</td>
+    </tr>
+  `).join('');
+}
 
 document.addEventListener('DOMContentLoaded', View.init);
