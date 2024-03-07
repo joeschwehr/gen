@@ -56,21 +56,19 @@ const validate = (e, isBlur = false) => {
   const numericRegex = /^-?\d*\.?\d+$/ // - digit, ., digit
   const incompleteNumericRegex = /^-?\d*\.?$/ // - digit, .
 
-  if (e.target.value === '' ||
-    e.target.value === '.' ||
-    e.target.value === '-' ||
-    incompleteNumericRegex.test(e.target.value)) {
+  if (e.target.value === '' || incompleteNumericRegex.test(e.target.value)) {
     removeErrorMessage(e);
 
-    if (isBlur) {
-      e.target.classList.remove('c-numeric-input--valid');
-      // add valid class
-      e.target.classList.add('c-numeric-input--valid');
-    }
+    if (isBlur)
+      showGreenStyle(e);
+
   } else if (!numericRegex.test(e.target.value)) {
     addErrorMessage(e);
   } else {
     removeErrorMessage(e);
+
+    if (isBlur)
+      showGreenStyle(e);
   }
 }
 
@@ -143,17 +141,36 @@ const removeErrorMessage = (e) => {
   }
 }
 
+// change to correct formats
 const fixFormatting = (e) => {
   let value = e.srcElement.value;
 
-  // *     change to correct format:
-  // *     01 => 1
   if (value.startsWith('0') && value.length > 1 && value[1] !== '.') {
+    // 01 => 1
     e.srcElement.value = value.slice(1);
-  }
 
-  // *     change to correct format:
-  // *       .1 ==> 0.1
-  if (value.startsWith('.'))
+  } else if (value.startsWith('.') && value.length > 1) {
+    // .1 ==> 0.1
     e.srcElement.value = '0' + value;
+
+  } else if (value.startsWith('-0') && value.length > 2 && value[2] !== '.') {
+    // -01 => -1
+    e.srcElement.value = '-' + value.slice(2);
+
+  } else if (value === '-0') {
+    // -0 => 0
+    e.srcElement.value = '0';
+
+  } else if (value.endsWith('.') && value.length > 1) {
+    // 0. => 0
+    e.srcElement.value = value.slice(0, -1);
+  }
 }
+
+const showGreenStyle = (e) => {
+  if (e.target.value === '.' || e.target.value === '-')
+    addErrorMessage(e);
+  else
+    e.target.classList.add('c-numeric-input--valid'); // add valid class
+}
+
