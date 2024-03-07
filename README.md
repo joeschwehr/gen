@@ -1,3 +1,28 @@
+# JOES NOTES
+
+I believe I've completed all the requirements for this project.  
+
+NUMERIC INPUT
+* I'm sanitizing the input so it only accepts numbers
+* You can enter multiple dashes or dashes at the end of the input to see the "error" class
+* Added input-formatting on blur
+* Added "success" class on blur
+* Remove red/green classes on focus
+* Added CSS file for styles
+
+RELATIVE DATE
+* I am assuming the day of the week starts on Sunday
+* The requirements for "this week", "last week", and "this month" don't really make sense to me. I've believe I've completed these requirements successfully, but I've also added notes to the page and additional output.
+* "Long time ago: everything else" makes no sense to me. I've added additional output here in an effort to statisfy requirements for "Long time ago".
+* Units tests have been added for multiple years, leap years, and when tests span two years
+* All tests are passing
+
+SHOPPING CART
+* Calling both API endpoints and getting data
+* In a real app we could add a spinner to the page during fetch
+* Data is fetched and output to table
+
+
 # JS Evaluation
 
 This repo includes a set of tests that can be used to assess the skills of
