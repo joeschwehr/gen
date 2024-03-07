@@ -162,7 +162,7 @@ const fixFormatting = (e) => {
     e.srcElement.value = value.slice(0, -1);
   }
 
-  if (Number(e.srcElement.value).toString())
+  if (Number(e.srcElement.value).toString() !== 'NaN')
     e.srcElement.value = Number(e.srcElement.value).toString();
 }
 
