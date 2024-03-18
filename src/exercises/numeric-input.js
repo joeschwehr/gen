@@ -21,7 +21,7 @@
 * red or green border to the input
 * */
 
-const NumericInput = {
+export const NumericInput = {
   init: () => {
     document.querySelectorAll('.c-numeric-input').forEach(elem => {
       elem.addEventListener('input', NumericInput.onChange);
