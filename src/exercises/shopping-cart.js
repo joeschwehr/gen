@@ -15,11 +15,12 @@
 *
 * */
 
-const View = {
+export const View = {
   init: async () => {
     const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
     tbodyElem.innerHTML = ''; // Clear existing content
 
+    // promise all
     // fetch cart data
     const cartRes = await fetch('http://localhost:4002/cart');
     const cartData = await cartRes.json();
@@ -29,11 +30,18 @@ const View = {
     const productData = await productRes.json();
 
     try {
+      // Create a lookup table for product data
+      const productLookup = {};
+      productData.forEach(product => {
+        productLookup[product.id] = product;
+      });
+
+      // Map cart data using the lookup table
       const cartItems = cartData.map(cartItem => {
-        const product = productData.find(product => product.id === cartItem.id);
+        const product = productLookup[cartItem.id];
         return {
           id: cartItem.id,
-          name: product.name
+          name: product ? product.name : 'Unknown Product'
         };
       });
 
@@ -42,12 +50,12 @@ const View = {
       tbodyElem.innerHTML = buildTableHTML(cartItems);
 
     } catch (error) {
-      console.error('An error occurred:', error);
+      throw new Error(error);
     }
   }
 };
 
-function buildTableHTML(cartItems) {
+export function buildTableHTML(cartItems) {
   return cartItems.map(cartItem => `
     <tr>
       <td>${cartItem.id}</td>
