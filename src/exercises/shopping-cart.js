@@ -20,13 +20,13 @@ export const View = {
     const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
     tbodyElem.innerHTML = ''; // Clear existing content
 
-    // promise all
-    // fetch cart data
-    const cartRes = await fetch('http://localhost:4002/cart');
-    const cartData = await cartRes.json();
+    // fetch cart data with promise.all
+    const [cartRes, productRes] = await Promise.all([
+      fetch('http://localhost:4002/cart'),
+      fetch('http://localhost:4002/products')
+    ]);
 
-    // fetch product data
-    const productRes = await fetch('http://localhost:4002/products');
+    const cartData = await cartRes.json();
     const productData = await productRes.json();
 
     try {
