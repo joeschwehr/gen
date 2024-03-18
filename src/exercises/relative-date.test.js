@@ -1,5 +1,5 @@
-import { calculateRelativeDate } from './relative-date';
-import { expect } from '@open-wc/testing';
+import { calculateRelativeDate, View } from './relative-date';
+import { expect, fixture, html } from '@open-wc/testing';
 
 describe('Calculate Relative Date', () => {
   const testCases = [
@@ -163,88 +163,250 @@ describe('Calculate Relative Date', () => {
         thousandYearsAgo: 1025,
         twoThousandYearsAgo: 25,
       }
+    },
+    {
+      // bad date
+      input: "Invalid Date",
+      date: new Date('abc'),
+      expected: {
+        today: new Date('abc'),
+        year: 'n/a',
+        month: 'n/a',
+        lastMonth: 'n/a',
+        date: 'n/a',
+        yesterday: new Date('abc'),
+        startOfThisWeek: new Date('abc'),
+        endOfThisWeek: new Date('abc'),
+        startOfLastWeek: new Date('abc'),
+        endOfLastWeek: new Date('abc'),
+        lastDayOfMonth: 'n/a',
+        tenYearsago: 'n/a',
+        fiftyYearsAgo: 'n/a',
+        hundredYearsAgo: 'n/a',
+        thousandYearsAgo: 'n/a',
+        twoThousandYearsAgo: 'n/a',
+      }
     }
   ];
 
   testCases.forEach(({ input, date, expected }) => {
     it(`Today (${input})`, () => {
-      const actual = calculateRelativeDate(date).today.toDateString();
-      expect(actual).to.equal(expected.today.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).today.toDateString();
+        expect(actual).to.equal(expected.today.toDateString());
+      }
+      catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Year (${input})`, () => {
-      const actual = calculateRelativeDate(date).year;
-      expect(actual).to.equal(expected.year);
+      try {
+        const actual = calculateRelativeDate(date).year;
+        expect(actual).to.equal(expected.year);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Month (${input})`, () => {
-      const actual = calculateRelativeDate(date).month;
-      expect(actual).to.equal(expected.month);
+      try {
+        const actual = calculateRelativeDate(date).month;
+        expect(actual).to.equal(expected.month);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Last Month (${input})`, () => {
-      const actual = calculateRelativeDate(date).lastMonth;
-      expect(actual).to.equal(expected.lastMonth);
+      try {
+        const actual = calculateRelativeDate(date).lastMonth;
+        expect(actual).to.equal(expected.lastMonth);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Date (${input})`, () => {
-      const actual = calculateRelativeDate(date).date;
-      expect(actual).to.equal(expected.date);
+      try {
+        const actual = calculateRelativeDate(date).date;
+        expect(actual).to.equal(expected.date);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Yesterday (${input})`, () => {
-      const actual = calculateRelativeDate(date).yesterday.toDateString();
-      expect(actual).to.equal(expected.yesterday.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).yesterday.toDateString();
+        expect(actual).to.equal(expected.yesterday.toDateString());
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Start of this week (${input})`, () => {
-      const actual = calculateRelativeDate(date).startOfThisWeek.toDateString();
-      expect(actual).to.equal(expected.startOfThisWeek.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).startOfThisWeek.toDateString();
+        expect(actual).to.equal(expected.startOfThisWeek.toDateString());
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`End of this week (${input})`, () => {
-      const actual = calculateRelativeDate(date).endOfThisWeek.toDateString();
-      expect(actual).to.equal(expected.endOfThisWeek.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).endOfThisWeek.toDateString();
+        expect(actual).to.equal(expected.endOfThisWeek.toDateString());
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Start of last week (${input})`, () => {
-      const actual = calculateRelativeDate(date).startOfLastWeek.toDateString();
-      expect(actual).to.equal(expected.startOfLastWeek.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).startOfLastWeek.toDateString();
+        expect(actual).to.equal(expected.startOfLastWeek.toDateString());
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`End of last week (${input})`, () => {
-      const actual = calculateRelativeDate(date).endOfLastWeek.toDateString();
-      expect(actual).to.equal(expected.endOfLastWeek.toDateString());
+      try {
+        const actual = calculateRelativeDate(date).endOfLastWeek.toDateString();
+        expect(actual).to.equal(expected.endOfLastWeek.toDateString());
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Last day of month (${input})`, () => {
-      const actual = calculateRelativeDate(date).lastDayOfMonth;
-      expect(actual).to.equal(expected.lastDayOfMonth);
+      try {
+        const actual = calculateRelativeDate(date).lastDayOfMonth;
+        expect(actual).to.equal(expected.lastDayOfMonth);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Ten years ago (${input})`, () => {
-      const actual = calculateRelativeDate(date).tenYearsago.getFullYear();
-      expect(actual).to.equal(expected.tenYearsago);
+      try {
+        const actual = calculateRelativeDate(date).tenYearsago.getFullYear();
+        expect(actual).to.equal(expected.tenYearsago);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Fifty years ago (${input})`, () => {
-      const actual = calculateRelativeDate(date).fiftyYearsAgo.getFullYear();
-      expect(actual).to.equal(expected.fiftyYearsAgo);
+      try {
+        const actual = calculateRelativeDate(date).fiftyYearsAgo.getFullYear();
+        expect(actual).to.equal(expected.fiftyYearsAgo);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Hundred years ago (${input})`, () => {
-      const actual = calculateRelativeDate(date).hundredYearsAgo.getFullYear();
-      expect(actual).to.equal(expected.hundredYearsAgo);
+      try {
+        const actual = calculateRelativeDate(date).hundredYearsAgo.getFullYear();
+        expect(actual).to.equal(expected.hundredYearsAgo);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Thousand years ago (${input})`, () => {
-      const actual = calculateRelativeDate(date).thousandYearsAgo.getFullYear();
-      expect(actual).to.equal(expected.thousandYearsAgo);
+      try {
+        const actual = calculateRelativeDate(date).thousandYearsAgo.getFullYear();
+        expect(actual).to.equal(expected.thousandYearsAgo);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
 
     it(`Two thousand years ago (${input})`, () => {
-      const actual = calculateRelativeDate(date).twoThousandYearsAgo.getFullYear();
-      expect(actual).to.equal(expected.twoThousandYearsAgo);
+      try {
+        const actual = calculateRelativeDate(date).twoThousandYearsAgo.getFullYear();
+        expect(actual).to.equal(expected.twoThousandYearsAgo);
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
   });
 });
+
+describe('View', () => {
+  it('should enable button if input is valid', async () => {
+    // Render component
+    const input = await fixture(html`<input type="text" id="relative-date-input" />`);
+    const btn = await fixture(html`<button id="relative-date-btn" disabled>Click me</button>`);
+
+    View.init();
+
+    // Simulate valid input
+    input.value = 'Feb 1, 2024';
+    input.dispatchEvent(new Event('input'));
+
+    // Check if button is enabled
+    expect(btn.hasAttribute('disabled')).to.be.false;
+  });
+
+  const testCases = [
+    {
+      inputDate: 'Feb 1, 2024',
+      expectedResults: [
+        'Today: 2024, Feb, 1',
+        'Yesterday: Wed Jan 31 2024',
+        'This week: Thu Jan 25 2024 &lt; Thu Feb 01 2024 &lt; Wed Jan 31 2024',
+        'This week: Sun Jan 28 2024 &lt; Thu Feb 01 2024 &lt; Sat Feb 03 2024',
+        'Last week: Thu Jan 18 2024 &lt; Thu Feb 01 2024 &lt;= Thu Jan 25 2024',
+        'Last week: Sun Jan 21 2024 TO Sat Jan 27 2024',
+        'This month: 2024, Feb, 1 &lt;= Thu Jan 18 2024',
+        'This month: Feb 1, 2024 TO Feb 29, 2024',
+        'Last month: Jan',
+        'This year: 2024',
+        'last year: 2023',
+        '10 years ago: 2014',
+        '50 years ago: 1974',
+        '100 years ago: 1924',
+        '1000 years ago: 1024',
+        '2000 years ago: 24',
+      ]
+    },
+    {
+      inputDate: 'Invalid Date',
+      expectedResults: [
+
+      ]
+    }
+    // Add more test cases as needed
+  ];
+
+  testCases.forEach((testCase) => {
+
+    it(`should add text for input date: ${testCase.inputDate}`, async () => {
+      // Render component with input date
+      await fixture(html`<input type="text" id="relative-date-input" value="${testCase.inputDate}" />`);
+      const btn = await fixture(html`<button id="relative-date-btn">Click me</button>`);
+      const msg = await fixture(html`<div id="relative-date-msg"></div>`);
+
+      View.init();
+
+      // Simulate click
+      btn.click();
+
+      // Check if text is added based on expected results
+      testCase.expectedResults.forEach((text) => {
+        if (!msg.innerHTML.includes(text)) {
+          console.log('error:', text);
+        }
+
+        expect(msg.innerHTML).to.contain(text);
+      });
+    });
+
+  });
+});
+

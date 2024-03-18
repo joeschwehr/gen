@@ -95,8 +95,6 @@ const View = {
     inputDateElem.addEventListener('input', e => {
       if (new Date(e.target.value) !== 'Invalid Date') {
         btn.removeAttribute('disabled');
-      } else {
-        btn.setAttribute('disabled', true);
       }
     })
 
@@ -104,6 +102,9 @@ const View = {
     btn.addEventListener('click', () => {
       const msgElement = document.getElementById('relative-date-msg');
       const inputDateElem = document.getElementById('relative-date-input');
+
+      if (inputDateElem.value === '' || inputDateElem.value === 'Invalid Date') return;
+
       msgElement.innerHTML = View.appendText(calculateRelativeDate(inputDateElem.value));
       View.fadeIn();
     });
@@ -196,4 +197,4 @@ const View = {
 };
 
 document.addEventListener('DOMContentLoaded', View.init);
-export { calculateRelativeDate };
+export { calculateRelativeDate, View };
